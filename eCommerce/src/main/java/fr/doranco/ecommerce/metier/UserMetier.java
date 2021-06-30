@@ -1,5 +1,6 @@
 package fr.doranco.ecommerce.metier;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +10,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import fr.doranco.ecommerce.cryptage.Cryptage;
+import fr.doranco.ecommerce.entity.beans.Params;
+import fr.doranco.ecommerce.entity.beans.User;
 import fr.doranco.ecommerce.entity.dto.UserDto;
-import fr.doranco.ecommerce.entity.pojo.User;
 import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
 import fr.doranco.ecommerce.model.dao.IParamsDao;
 import fr.doranco.ecommerce.model.dao.IUserDao;
@@ -20,8 +22,8 @@ import fr.doranco.ecommerce.utils.Dates;
 
 public class UserMetier implements IUserMetier {
 
-	IUserDao userDao = new UserDao();
-	IParamsDao paramsDao = new ParamsDao();
+	private IUserDao userDao = new UserDao();
+	private IParamsDao paramsDao = new ParamsDao();
 
 	@Override
 	public void add(UserDto user) throws Exception {
@@ -36,7 +38,8 @@ public class UserMetier implements IUserMetier {
 		}
 		
 		String algo = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
-		SecretKey key = new SecretKeySpec(paramsDao.getCleCryptage(1), algo);
+		Params params = paramsDao.get(Params.class, 1);
+		SecretKey key = new SecretKeySpec(params.getCleCryptage(), algo);
 		byte[] password = Cryptage.encrypt(algo, user.getPassword(), key);
 		
 		User userToAdd = new User();
@@ -101,10 +104,12 @@ public class UserMetier implements IUserMetier {
 		}
 		
 		String algo = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
-		SecretKey key = new SecretKeySpec(paramsDao.getCleCryptage(1), algo);
+		Params params = paramsDao.get(Params.class, 1);
+		SecretKey key = new SecretKeySpec(params.getCleCryptage(), algo);
 		byte[] password = Cryptage.encrypt(algo, user.getPassword(), key);
 		
 		User userToUpdate = new User();
+		userToUpdate.setId(Integer.valueOf(user.getId()));
 		userToUpdate.setNom(user.getNom());
 		userToUpdate.setPrenom(user.getPrenom());
 		userToUpdate.setDateNaissance(Dates.convertStringToDateUtil(user.getDateNaissance()));
@@ -143,14 +148,27 @@ public class UserMetier implements IUserMetier {
 
 	@Override
 	public Map<String, Set<UserDto>> getUsersByVille() throws Exception {
-		// TODO Auto-generated method stub
+//		Map<String, Set<User>> usersByVille = userDao.getUsersByVille();
+//		Map<String, Set<UserDto>> usersDtoByville = new HashMap<String, Set<UserDto>>();
 		return null;
 	}
 
 	@Override
 	public List<UserDto> getUsersOfVille(String ville) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<UserDto> usersDtoOfVille = new ArrayList<UserDto>();
+		List<User> usersOfVille = userDao.getUsersOfVille(ville);
+		
+		for (User user : usersOfVille) {
+			UserDto userDto = new UserDto();
+			userDto.setNom(user.getNom());
+			userDto.setPrenom(user.getPrenom());
+			userDto.setDateNaissance(Dates.convertDateUtilToString(user.getDateNaissance()));
+			userDto.setProfil(user.getProfil());
+			userDto.setEmail(user.getEmail());
+			userDto.setTelephone(user.getTelephone());
+			usersDtoOfVille.add(userDto);
+		}
+		return usersDtoOfVille;
 	}
 	
 

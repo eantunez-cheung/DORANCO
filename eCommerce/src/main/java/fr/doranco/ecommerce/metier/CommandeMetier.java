@@ -4,13 +4,13 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.Commande;
+import fr.doranco.ecommerce.entity.beans.Commande;
 import fr.doranco.ecommerce.model.dao.CommandeDao;
 import fr.doranco.ecommerce.model.dao.ICommandeDao;
 
 public class CommandeMetier implements ICommandeMetier {
 
-	ICommandeDao commandeDao = new CommandeDao();
+	private ICommandeDao commandeDao = new CommandeDao();
 	
 	@Override
 	public void add(Commande commande) throws Exception {

@@ -9,8 +9,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import fr.doranco.ecommerce.cryptage.Cryptage;
+import fr.doranco.ecommerce.entity.beans.CartePaiement;
+import fr.doranco.ecommerce.entity.beans.Params;
 import fr.doranco.ecommerce.entity.dto.CartePaiementDto;
-import fr.doranco.ecommerce.entity.pojo.CartePaiement;
 import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
 import fr.doranco.ecommerce.model.dao.CartePaiementDao;
 import fr.doranco.ecommerce.model.dao.ICartePaiementDao;
@@ -20,8 +21,8 @@ import fr.doranco.ecommerce.utils.Dates;
 
 public class CartePaiementMetier implements ICartePaiementMetier {
 
-	ICartePaiementDao cartePaiementDao = new CartePaiementDao();
-	IParamsDao paramsDao = new ParamsDao();
+	private ICartePaiementDao cartePaiementDao = new CartePaiementDao();
+	private IParamsDao paramsDao = new ParamsDao();
 	
 	@Override
 	public void add(CartePaiementDto cartepaiementDto) throws Exception {
@@ -41,7 +42,8 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		}
 		
 		String algo = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
-		SecretKey key = new SecretKeySpec(paramsDao.getCleCryptage(1), algo);
+		Params params = paramsDao.get(Params.class, 1);
+		SecretKey key = new SecretKeySpec(params.getCleCryptage(), algo);
 		
 		CartePaiement cartePaiement = new CartePaiement();
 		cartePaiement.setNomProprietaire(cartepaiementDto.getNomProprietaire());
@@ -61,7 +63,8 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		}
 		
 		String algo = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
-		SecretKey key = new SecretKeySpec(paramsDao.getCleCryptage(1), algo);
+		Params params = paramsDao.get(Params.class, 1);
+		SecretKey key = new SecretKeySpec(params.getCleCryptage(), algo);
 		
 		CartePaiement cartePaiement = cartePaiementDao.get(CartePaiement.class, id);
 		cartepaiementDto.setNomProprietaire(cartePaiement.getNomProprietaire());
@@ -78,7 +81,8 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		Set<CartePaiement> cartespaiement = new HashSet<CartePaiement>(cartePaiementDao.getAll(CartePaiement.class));
 		
 		String algo = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
-		SecretKey key = new SecretKeySpec(paramsDao.getCleCryptage(1), algo);
+		Params params = paramsDao.get(Params.class, 1);
+		SecretKey key = new SecretKeySpec(params.getCleCryptage(), algo);
 		
 		for (CartePaiement cartePaiement : cartespaiement) {
 			CartePaiementDto cartepaiementDto = new CartePaiementDto();
@@ -103,7 +107,8 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 			throw new IllegalArgumentException("Les paramètre doivent être non nuls et non vides !");
 		}
 		String algo = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
-		SecretKey key = new SecretKeySpec(paramsDao.getCleCryptage(1), algo);
+		Params params = paramsDao.get(Params.class, 1);
+		SecretKey key = new SecretKeySpec(params.getCleCryptage(), algo);
 		
 		CartePaiement cartePaiement = new CartePaiement();
 		cartePaiement.setNomProprietaire(cartepaiementDto.getNomProprietaire());

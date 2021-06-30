@@ -3,13 +3,13 @@ package fr.doranco.ecommerce.metier;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.Categorie;
+import fr.doranco.ecommerce.entity.beans.Categorie;
 import fr.doranco.ecommerce.model.dao.CategorieDao;
 import fr.doranco.ecommerce.model.dao.ICategorieDao;
 
 public class CategorieMetier implements ICategorieMetier {
 
-	ICategorieDao categorieDao = new CategorieDao();
+	private ICategorieDao categorieDao = new CategorieDao();
 	
 	@Override
 	public void add(Categorie categorie) throws Exception {

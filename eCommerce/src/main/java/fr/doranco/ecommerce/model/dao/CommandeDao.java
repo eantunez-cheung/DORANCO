@@ -7,12 +7,12 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import fr.doranco.ecommerce.entity.pojo.Commande;
+import fr.doranco.ecommerce.entity.beans.Commande;
 import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class CommandeDao extends AbstractEntityFacade<Commande> implements ICommandeDao {
 
-	Session session = null;
+	private Session session = null;
 	
 	@Override
 	public Commande getCommandesByNumero(String numero) throws Exception {

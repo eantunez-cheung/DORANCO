@@ -2,7 +2,7 @@ package fr.doranco.ecommerce.model.dao;
 
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.Adresse;
+import fr.doranco.ecommerce.entity.beans.Adresse;
 
 public interface IAdresseDao extends IEntityFacade<Adresse> {
 

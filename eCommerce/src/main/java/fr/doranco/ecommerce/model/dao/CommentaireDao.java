@@ -6,12 +6,12 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import fr.doranco.ecommerce.entity.pojo.Commentaire;
+import fr.doranco.ecommerce.entity.beans.Commentaire;
 import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class CommentaireDao extends AbstractEntityFacade<Commentaire> implements ICommentaireDao {
 
-	Session session = null;
+	private Session session = null;
 	
 	@Override
 	public Set<Commentaire> getCommentairesByNote(Integer note) throws Exception {

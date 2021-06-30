@@ -2,7 +2,7 @@ package fr.doranco.ecommerce.metier;
 
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.Categorie;
+import fr.doranco.ecommerce.entity.beans.Categorie;
 
 public interface ICategorieMetier {
 

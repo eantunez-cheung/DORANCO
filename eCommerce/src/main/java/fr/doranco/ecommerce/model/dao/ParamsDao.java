@@ -1,22 +1,23 @@
 package fr.doranco.ecommerce.model.dao;
 
-import org.hibernate.Session;
-import org.hibernate.query.Query;
+import java.util.List;
 
-import fr.doranco.ecommerce.entity.pojo.Params;
-import fr.doranco.ecommerce.model.HibernateConnector;
+import fr.doranco.ecommerce.entity.beans.Params;
 
 public class ParamsDao extends AbstractEntityFacade<Params> implements IParamsDao {
 
 	@Override
-	public byte[] getCleCryptage(Integer id) throws Exception {
-		if (id == null || id <= 0) {
-			throw new IllegalArgumentException("Le paramètre 'id' doit être supérieur à 0 !");
-		}
-		Session session = HibernateConnector.getInstance().getSession();
-		Query<?> query = session.createNamedQuery("Params.findById");
-		query.setParameter("id", id);
-		return (byte[]) query.getSingleResult();
+	public List<Params> getAll(Class<Params> entity) throws Exception {
+		return null;
 	}
 
+	@Override
+	public void update(Params entity) throws Exception {
+		throw new IllegalAccessException("Vous n'avez pas le droit d'utiliser cette méthode !");
+	}
+
+	@Override
+	public void remove(Params entity) throws Exception {
+		throw new IllegalAccessException("Vous n'avez pas le droit d'utiliser cette méthode !");
+	}
 }

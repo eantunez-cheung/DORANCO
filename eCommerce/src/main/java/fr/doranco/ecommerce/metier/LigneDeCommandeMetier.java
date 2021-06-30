@@ -3,13 +3,13 @@ package fr.doranco.ecommerce.metier;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.LigneDeCommande;
+import fr.doranco.ecommerce.entity.beans.LigneDeCommande;
 import fr.doranco.ecommerce.model.dao.ILigneDeCommandeDao;
 import fr.doranco.ecommerce.model.dao.LigneDeCommandeDao;
 
 public class LigneDeCommandeMetier implements ILigneDeCommandeMetier {
 
-	ILigneDeCommandeDao ligneDeCommandeDao = new LigneDeCommandeDao();
+	private ILigneDeCommandeDao ligneDeCommandeDao = new LigneDeCommandeDao();
 	
 	@Override
 	public void add(LigneDeCommande ligneDeCommande) throws Exception {

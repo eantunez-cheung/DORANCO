@@ -12,12 +12,12 @@ import org.hibernate.Session;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
-import fr.doranco.ecommerce.entity.pojo.User;
+import fr.doranco.ecommerce.entity.beans.User;
 import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class UserDao extends AbstractEntityFacade<User> implements IUserDao {
 
-	Session session = null;
+	private Session session = null;
 
 	@Override
 	public User getUserByEmail(String email) throws Exception {

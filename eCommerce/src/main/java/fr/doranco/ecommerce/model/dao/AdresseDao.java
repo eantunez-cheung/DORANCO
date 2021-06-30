@@ -6,12 +6,12 @@ import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import fr.doranco.ecommerce.entity.pojo.Adresse;
+import fr.doranco.ecommerce.entity.beans.Adresse;
 import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class AdresseDao extends AbstractEntityFacade<Adresse> implements IAdresseDao {
 
-	Session session = null;
+	private Session session = null;
 	
 	@Override
 	public Set<Adresse> getAdressesByUserId(Integer userId) throws Exception {

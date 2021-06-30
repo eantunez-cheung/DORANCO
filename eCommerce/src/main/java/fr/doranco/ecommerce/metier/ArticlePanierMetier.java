@@ -3,13 +3,13 @@ package fr.doranco.ecommerce.metier;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.ArticlePanier;
+import fr.doranco.ecommerce.entity.beans.ArticlePanier;
 import fr.doranco.ecommerce.model.dao.ArticlePanierDao;
 import fr.doranco.ecommerce.model.dao.IArticlePanierDao;
 
 public class ArticlePanierMetier implements IArticlePanierMetier {
 
-	IArticlePanierDao articlePanierDao = new ArticlePanierDao();
+	private IArticlePanierDao articlePanierDao = new ArticlePanierDao();
 	
 	@Override
 	public void add(ArticlePanier articlePanier) throws Exception {

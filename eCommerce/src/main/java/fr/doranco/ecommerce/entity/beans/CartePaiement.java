@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.entity.pojo;
+package fr.doranco.ecommerce.entity.beans;
 
 import java.io.Serializable;
 import java.util.Arrays;

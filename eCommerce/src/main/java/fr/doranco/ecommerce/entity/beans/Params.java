@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.entity.pojo;
+package fr.doranco.ecommerce.entity.beans;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -8,16 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "params", catalog = "projet_ecommerce_db")
-@NamedQueries({
-	@NamedQuery(name = "Params.findById", query = "SELECT cle_cryptage FROM Params WHERE id = :id")
-})
 public class Params implements Serializable {
 
 	private static final long serialVersionUID = 1L;

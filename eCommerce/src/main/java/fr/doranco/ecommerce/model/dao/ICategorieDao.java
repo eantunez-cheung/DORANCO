@@ -1,6 +1,6 @@
 package fr.doranco.ecommerce.model.dao;
 
-import fr.doranco.ecommerce.entity.pojo.Categorie;
+import fr.doranco.ecommerce.entity.beans.Categorie;
 
 public interface ICategorieDao extends IEntityFacade<Categorie> {
 

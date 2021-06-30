@@ -3,7 +3,7 @@ package fr.doranco.ecommerce.metier;
 import java.util.Date;
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.Commande;
+import fr.doranco.ecommerce.entity.beans.Commande;
 
 public interface ICommandeMetier {
 

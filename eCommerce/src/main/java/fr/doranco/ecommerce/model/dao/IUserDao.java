@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.User;
+import fr.doranco.ecommerce.entity.beans.User;
 
 public interface IUserDao extends IEntityFacade<User>{
 

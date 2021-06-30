@@ -3,7 +3,7 @@ package fr.doranco.ecommerce.model.dao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import fr.doranco.ecommerce.entity.pojo.Categorie;
+import fr.doranco.ecommerce.entity.beans.Categorie;
 import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class CategorieDao extends AbstractEntityFacade<Categorie> implements ICategorieDao {

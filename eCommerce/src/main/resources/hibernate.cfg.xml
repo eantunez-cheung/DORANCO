@@ -15,15 +15,15 @@
         <property name="hibernate.charSet">UTF-8</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
         
-        <mapping class="fr.doranco.ecommerce.entity.Adresse"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.User"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.Article"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.Commande"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.LigneDeCommande"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.ArticlePanier"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.Categorie"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.Params"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.Commentaire"></mapping>
-        <mapping class="fr.doranco.ecommerce.entity.CartePaiement"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.Adresse"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.User"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.Article"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.Commande"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.LigneDeCommande"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.ArticlePanier"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.Categorie"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.Params"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.Commentaire"></mapping>
+        <mapping class="fr.doranco.ecommerce.entity.beans.CartePaiement"></mapping>
     </session-factory>
 </hibernate-configuration>

@@ -3,12 +3,12 @@ package fr.doranco.ecommerce.model.dao;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import fr.doranco.ecommerce.entity.pojo.Article;
+import fr.doranco.ecommerce.entity.beans.Article;
 import fr.doranco.ecommerce.model.HibernateConnector;
 
 public class ArticleDao extends AbstractEntityFacade<Article> implements IArticleDao {
 
-	Session session = null;
+	private Session session = null;
 
 	@Override
 	public Article getArticleByNom(String nom) throws Exception {

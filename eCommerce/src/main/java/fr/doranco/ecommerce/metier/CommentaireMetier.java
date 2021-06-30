@@ -3,13 +3,13 @@ package fr.doranco.ecommerce.metier;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.Commentaire;
+import fr.doranco.ecommerce.entity.beans.Commentaire;
 import fr.doranco.ecommerce.model.dao.CommentaireDao;
 import fr.doranco.ecommerce.model.dao.ICommentaireDao;
 
 public class CommentaireMetier implements ICommentaireMetier {
 
-	ICommentaireDao commentaireDao = new CommentaireDao();
+	private ICommentaireDao commentaireDao = new CommentaireDao();
 	
 	@Override
 	public void add(Commentaire commentaire) throws Exception {

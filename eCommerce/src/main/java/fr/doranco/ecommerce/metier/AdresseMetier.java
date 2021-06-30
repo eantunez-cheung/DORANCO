@@ -3,13 +3,13 @@ package fr.doranco.ecommerce.metier;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.doranco.ecommerce.entity.pojo.Adresse;
+import fr.doranco.ecommerce.entity.beans.Adresse;
 import fr.doranco.ecommerce.model.dao.AdresseDao;
 import fr.doranco.ecommerce.model.dao.IAdresseDao;
 
 public class AdresseMetier implements IAdresseMetier {
 
-	IAdresseDao adresseDao = new AdresseDao();
+	private IAdresseDao adresseDao = new AdresseDao();
 	
 	@Override
 	public void add(Adresse adresse) throws Exception {
