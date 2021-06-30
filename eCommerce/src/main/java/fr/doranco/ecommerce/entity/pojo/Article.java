@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.entity;
+package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -20,6 +22,9 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "article", catalog = "projet_ecommerce_db")
+@NamedQueries({
+	@NamedQuery(name = "Article.findByNom", query = "FROM Article a WHERE nom = :nom")
+})
 public class Article implements Serializable {
 
 	private static final long serialVersionUID = 1L;

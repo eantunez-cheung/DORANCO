@@ -1,4 +1,4 @@
-package fr.doranco.ecommerce.entity;
+package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
 
@@ -9,12 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "adresse", catalog = "projet_ecommerce_db")
+@NamedQueries({
+	@NamedQuery(name = "Adresse.findByUserId", query = "FROM Adresse a WHERE user_id = :userId"),
+	@NamedQuery(name = "Adresse.findByVille", query = "FROM Adresse a WHERE ville = :ville")
+})
 public class Adresse implements Serializable {
 
 	private static final long serialVersionUID = 1L;

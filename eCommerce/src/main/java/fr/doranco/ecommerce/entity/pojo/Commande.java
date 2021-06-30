@@ -1,9 +1,10 @@
-package fr.doranco.ecommerce.entity;
+package fr.doranco.ecommerce.entity.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -22,6 +25,12 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "commande", catalog = "projet_ecommerce_db")
+@NamedQueries({
+	@NamedQuery(name = "Commande.findByUserId", query = "FROM Commande c WHERE user_id = :userId"),
+	@NamedQuery(name = "Commande.findByDateCreation", query = "FROM Commande c WHERE date_creation = :dateCreation"),
+	@NamedQuery(name = "Commande.findByNumero", query = "FROM Commande c WHERE numero = :numero"),
+	
+})
 public class Commande implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -32,8 +41,9 @@ public class Commande implements Serializable {
 	private Integer id;
 	
 	@NotEmpty
-	@Column(name = "numero",length = 8, nullable = false)
-	private String numero;
+	@GeneratedValue
+	@Column(name = "numero", unique = true, length = 8, nullable = false)
+	private UUID numero;
 	
 	@NotNull
 	@Column(name = "date_creation", nullable = false)
@@ -78,10 +88,8 @@ public class Commande implements Serializable {
 		this.lignesCommande = new HashSet<LigneDeCommande>();
 	}
 
-	public Commande(String numero, Date dateCreation, Date dateLivraison, Float totalRemise, Float fraisExpedition,
+	public Commande( Date dateLivraison, Float totalRemise, Float fraisExpedition,
 			Float totalGeneral) {
-		this.numero = numero;
-		this.dateCreation = dateCreation;
 		this.dateLivraison = dateLivraison;
 		this.totalRemise = totalRemise;
 		this.fraisExpedition = fraisExpedition;
@@ -97,11 +105,11 @@ public class Commande implements Serializable {
 		this.id = id;
 	}
 
-	public String getNumero() {
+	public UUID getNumero() {
 		return numero;
 	}
 
-	public void setNumero(String numero) {
+	public void setNumero(UUID numero) {
 		this.numero = numero;
 	}
 
