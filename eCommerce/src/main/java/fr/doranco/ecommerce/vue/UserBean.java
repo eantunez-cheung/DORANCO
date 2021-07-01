@@ -19,7 +19,6 @@ public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@ManagedProperty(name = "id", value = "")
 	private String id;
 
 	@ManagedProperty(name = "nom", value = "")
@@ -58,17 +57,18 @@ public class UserBean implements Serializable {
 	}
 
 	public String addUser() {
+		UserDto userDto = null;
 		if (!password.equals(confirmPassword)) {
 			this.messageError = "Le mot de passe et la confirmation du mot de passe sont différent !";
 			return "";
 		}
 		
-		UserDto userDto = new UserDto();
+		
 		
 		try {
 			userDto = userMetier.getUserByEmail(email);
 		} catch (Exception e) {
-			this.messageError = "Erreur technique lors de l'ajout de l'utilisateur !";
+			this.messageError = "Erreur technique lors de l'ajout de l'utilisateur Email!";
 			System.out.println(e);
 			return "";
 		}
@@ -78,6 +78,7 @@ public class UserBean implements Serializable {
 			return "";
 		}
 		
+		userDto = new UserDto();
 		userDto.setNom(nom);
 		userDto.setPrenom(prenom);
 		userDto.setDateNaissance(dateNaissance);
@@ -92,10 +93,7 @@ public class UserBean implements Serializable {
 			this.messageError = "Erreur technique lors de l'ajout de l'utilisateur !";
 			System.out.println(e);
 		}
-		if (messageError.isEmpty()) {
-			messageSuccess = "Utilisateur ajouté avec succès.";
-		}
-		return "";
+		return "login";
 	}
 
 	public String updateUser() {
@@ -107,6 +105,11 @@ public class UserBean implements Serializable {
 	}
 
 	public String showUser(UserDto userDto) {
+		this.nom = userDto.getNom();
+		this.prenom = userDto.getPrenom();
+		this.dateNaissance = userDto.getDateNaissance();
+		this.email = userDto.getEmail();
+		this.telephone = userDto.getTelephone();
 		return "";
 	}
 

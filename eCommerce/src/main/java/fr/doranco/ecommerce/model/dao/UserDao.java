@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
@@ -25,10 +26,13 @@ public class UserDao extends AbstractEntityFacade<User> implements IUserDao {
 			throw new IllegalArgumentException("Le paramètre 'email' doit être non nul et non vide !");
 		}
 		session = HibernateConnector.getInstance().getSession();
-		Query<?> query = session.createNamedQuery("User.findByEmail");
+		Query<User> query = session.createNamedQuery("User.findByEmail", User.class);
 		query.setParameter("email", email);
-		User user = (User) query.getSingleResult();
-		return user;
+		try {
+			return query.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override

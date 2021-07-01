@@ -5,46 +5,54 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-		<title>Se connecter</title>
-	</head>
 
-	<body>
-		<ui:composition template="resources/template/layout.xhtml">
-			<ui:define name="content">
-				<h:form>
-					<h:panelGrid columns="1" cellpadding="0" cellspacing="2">
-						<h:outputLabel value="Email"></h:outputLabel>
-						<h:inputText id="email" required="true" value="">
-							<f:validateLength minimum="8" maximum="25"></f:validateLength>
-						</h:inputText>
-						<h:outputLabel value="Password"></h:outputLabel>
-						<h:inputText id="password" required="true" value="">
-							<f:validateLength minimum="8" maximum="16"></f:validateLength>
-						</h:inputText>
-						<h:message for="password" style="color:red"></h:message>
-					</h:panelGrid>
-					<p>
-						<tr>
-							<td>
-								<h:button id="retour" value="Retour" outcome="accueil"></h:button>
-							</td>
-							<td>
-								<h:commandButton id="valider" value="Valider" action="#{loginBean.seConnecter()}"></h:commandButton>
-							</td>
-						</tr>
-					</p>
-				</h:form>
-				
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Se connecter</title>
+</head>
+
+<body>
+	<ui:composition template="resources/template/layout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<h:panelGrid columns="1" cellpadding="0" cellspacing="2">
+					<h:outputLabel value="Email"></h:outputLabel>
+					<h:inputText id="email" required="true" value="#{loginBean.email}"
+						requiredMessage="Vous devez renseigner un email !">
+						<f:validateLength minimum="8" maximum="25"></f:validateLength>
+					</h:inputText>
+					<h:message for="email" style="color:red"></h:message>
+					<h:outputLabel value="Password"></h:outputLabel>
+					<h:inputSecret id="password" required="true" value="#{loginBean.password}"
+						requiredMessage="Vous devez renseigner un mot de passe !">
+						<f:validateLength minimum="8" maximum="16"></f:validateLength>
+					</h:inputSecret>
+					<h:message for="password" style="color:red"></h:message>
+				</h:panelGrid>
 				<p>
-					<h:link id="mdp-oubie" value="Mot de passe oublié ?" outcome="forget-mdp"></h:link>
+					<tr>
+						<td><h:button id="retour" value="Retour" outcome="accueil"></h:button>
+						</td>
+						<td><h:commandButton id="valider" value="Valider"
+								action="#{loginBean.seConnecter()}"></h:commandButton></td>
+					</tr>
 				</p>
-				<p>Pas encore de compte ?
-					<h:link id="sinscrire" value="Créer un compte" outcome="utilisateurs"></h:link>
+				<p>
+					<h:outputText value="#{loginBean.messageSuccess}" style="color:green"></h:outputText>
+					<h:outputText value="#{loginBean.messageError}" style="color:red"></h:outputText>
 				</p>
-			</ui:define>
-		</ui:composition>
-	</body>
+			</h:form>
+
+			<p>
+				<h:link id="mdp-oublie" value="Mot de passe oublié ?"
+					outcome="forget-mdp"></h:link>
+			</p>
+			<p>
+				Pas encore de compte ?
+				<h:link id="sinscrire" value="Créer un compte"
+					outcome="add-utilisateur"></h:link>
+			</p>
+		</ui:define>
+	</ui:composition>
+</body>
 </html>

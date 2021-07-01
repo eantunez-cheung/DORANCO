@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
+<title>Ajouter utilisateur</title>
+</head>
+
+<body>
+	<ui:composition template="resources/template/layout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<table>
+					<tr>
+						<td>Nom :</td>
+						<td><h:inputText id="nom" required="true"
+								value="#{userBean.nom}" requiredMessage="Le nom est obligatoire">
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputText> <h:message for="nom" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Prenom :</td>
+						<td><h:inputText id="prenom" required="true"
+								value="#{userBean.prenom}"
+								requiredMessage="Le prénom est obligatoire">
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputText> <h:message for="prenom" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Date de naissance :</td>
+						<td><h:inputText id="date_naissance" required="true"
+								value="#{userBean.dateNaissance}"
+								requiredMessage="La date de naissance est obligatoire">
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputText> <h:message for="date_naissance" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Email :</td>
+						<td><h:inputText id="email" required="true"
+								value="#{userBean.email}"
+								requiredMessage="L'email est obligatoire">
+								<f:validateRegex
+									pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+							</h:inputText> <h:message for="email" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Mot de passe :</td>
+						<td><h:inputSecret id="password" required="true"
+								value="#{userBean.password}"
+								requiredMessage="Le mot de passe est obligatoire">
+								<f:validateLength minimum="8" maximum="16"></f:validateLength>
+							</h:inputSecret> <h:message for="password" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Confirmer mot de passe :</td>
+						<td><h:inputSecret id="confirmPassword" required="true"
+								value="#{userBean.confirmPassword}"
+								requiredMessage="Le mot de passe est obligatoire">
+								<f:validateLength minimum="8" maximum="16"></f:validateLength>
+							</h:inputSecret> <h:message for="confirmPassword" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Téléphone :</td>
+						<td><h:inputText id="telephone" required="false"
+								value="#{userBean.telephone}">
+								<!-- 						<f:validateLength minimum="10" maximum="15"></f:validateLength> -->
+							</h:inputText> <h:message for="telephone" style="color:red"></h:message></td>
+					</tr>
+				</table>
+				<p>
+					<tr>
+						<td></td>
+						<td><h:button id="retour" value="Retour" outcome="accueil"></h:button>
+						</td>
+						<td><h:commandButton id="addUser" value="Ajouter Utilisateur"
+								action="#{userBean.addUser()}"></h:commandButton></td>
+					</tr>
+				</p>
+				<p>
+					<h:outputText value="#{userBean.messageSuccess}"
+						style="color:green"></h:outputText>
+					<h:outputText value="#{userBean.messageError}" style="color:red"></h:outputText>
+				</p>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

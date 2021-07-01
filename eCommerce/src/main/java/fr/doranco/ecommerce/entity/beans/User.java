@@ -55,7 +55,7 @@ public class User implements Serializable {
 	private boolean isActif;
 	
 	@NotEmpty
-	@Column(name = "profil", length = 4, nullable = false)
+	@Column(name = "profil", length = 1, nullable = false)
 	private String profil;
 	
 	@NotEmpty

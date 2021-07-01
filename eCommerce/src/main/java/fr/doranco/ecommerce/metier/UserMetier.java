@@ -135,12 +135,23 @@ public class UserMetier implements IUserMetier {
 		}
 		
 		User user = userDao.getUserByEmail(email);
+		if (user == null) {
+			return null;
+		}
+		
+		String algo = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
+		Params params = paramsDao.get(Params.class, 1);
+		SecretKey key = new SecretKeySpec(params.getCleCryptage(), algo);
+		String password = Cryptage.decrypt(algo, user.getPassword(), key);
+		
 		UserDto userDto = new UserDto();
+		userDto.setId(user.getId().toString());
 		userDto.setNom(user.getNom());
 		userDto.setPrenom(user.getPrenom());
 		userDto.setDateNaissance(Dates.convertDateUtilToString(user.getDateNaissance()));
 		userDto.setProfil(user.getProfil());
 		userDto.setEmail(user.getEmail());
+		userDto.setPassword(password);
 		userDto.setTelephone(user.getTelephone());
 		
 		return userDto;
