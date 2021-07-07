@@ -7,11 +7,13 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.Cookie;
 
 import fr.doranco.ecommerce.entity.dto.UserDto;
 import fr.doranco.ecommerce.enums.TypeUtilisateur;
 import fr.doranco.ecommerce.metier.IUserMetier;
 import fr.doranco.ecommerce.metier.UserMetier;
+import fr.doranco.ecommerce.utils.Cookies;
 
 @ManagedBean(name = "userBean")
 @SessionScoped
@@ -52,6 +54,8 @@ public class UserBean implements Serializable {
 	private String messageError;
 
 	private IUserMetier userMetier = new UserMetier();
+	
+	private final Cookie cookie = Cookies.getCookie("user");
 
 	public UserBean() {
 	}
@@ -62,8 +66,6 @@ public class UserBean implements Serializable {
 			this.messageError = "Le mot de passe et la confirmation du mot de passe sont différent !";
 			return "";
 		}
-		
-		
 		
 		try {
 			userDto = userMetier.getUserByEmail(email);
@@ -92,6 +94,7 @@ public class UserBean implements Serializable {
 		} catch (Exception e) {
 			this.messageError = "Erreur technique lors de l'ajout de l'utilisateur !";
 			System.out.println(e);
+			return "";
 		}
 		return "login";
 	}
@@ -104,13 +107,17 @@ public class UserBean implements Serializable {
 		return "";
 	}
 
-	public String showUser(UserDto userDto) {
-		this.nom = userDto.getNom();
-		this.prenom = userDto.getPrenom();
-		this.dateNaissance = userDto.getDateNaissance();
-		this.email = userDto.getEmail();
-		this.telephone = userDto.getTelephone();
-		return "";
+	public String showUser() {
+		try {
+			int id = Integer.valueOf(cookie.getValue());
+			UserDto userDto = userMetier.getUser(id);
+			String nomPrenom = userDto.getNom() + " " + userDto.getPrenom();
+			return nomPrenom;
+		} catch (Exception e) {
+			this.messageError = "Erreur lors de la récupération de l'utilisateur courant !";
+			System.err.println(e);
+			return null;
+		}
 	}
 
 	public Set<UserDto> getUsers() {

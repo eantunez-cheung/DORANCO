@@ -5,11 +5,13 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
 
 import fr.doranco.ecommerce.entity.beans.Adresse;
+import fr.doranco.ecommerce.entity.beans.User;
 import fr.doranco.ecommerce.metier.AdresseMetier;
 import fr.doranco.ecommerce.metier.IAdresseMetier;
+import fr.doranco.ecommerce.utils.Cookies;
 
 @ManagedBean(name =  "adresseBean")
 @SessionScoped
@@ -38,20 +40,31 @@ public class AdresseBean implements Serializable {
 
 	private IAdresseMetier adresseMetier = new AdresseMetier();
 	
+	private final Cookie cookie = Cookies.getCookie("user");
+
+	
 	public AdresseBean() {
 	}
 	
 	public String addAdresse() {
+		
+		User user = new User();
+		user.setId(Integer.valueOf(cookie.getValue()));
+		
 		Adresse adresse = new Adresse();
 		adresse.setNumero(Integer.valueOf(numero));
 		adresse.setRue(rue);
 		adresse.setVille(ville);
 		adresse.setCodePostal(codePostal);
-		
-		String context = FacesContext.getCurrentInstance().getExternalContext().getRemoteUser();
-		
-		System.out.println("Context Name : " + context);
-		return "";
+		adresse.setUser(user);
+		try {
+			adresseMetier.add(adresse);
+		} catch (Exception e) {
+			this.messageError = "Erreur tehcnique lors de l'ajout d'une adresse !";
+			System.err.println(e);
+			return "";
+		}
+		return "utilisateur";
 	}
 	
 	public String updateAdresse() {

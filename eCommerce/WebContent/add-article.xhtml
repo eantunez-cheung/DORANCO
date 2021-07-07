@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
+<title>Ajouter article</title>
+</head>
+
+<body>
+	<ui:composition template="resources/template/layout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<table>
+					<tr>
+						<td>Nom article :</td>
+						<td><h:inputText id="nom" required="true"
+								value="#{articleBean.nom}" requiredMessage="Le nom de l'article est obligatoire">
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputText> <h:message for="nom" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Description  :</td>
+						<td><h:inputText id="description" required="true"
+								value="#{articleBean.description}"
+								requiredMessage="Le prénom du propriétaire est obligatoire">
+								<f:validateLength minimum="0" maximum="255"></f:validateLength>
+							</h:inputText> <h:message for="description" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Prix :</td>
+						<td><h:inputText id="prix" required="true"
+								value="#{articleBean.prix}"
+								requiredMessage="Le prix de l'article est obligatoire">
+							</h:inputText> <h:message for="prix" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Remise :</td>
+						<td><h:inputText id="remise" required="true"
+								value="#{articleBean.remise}"
+								requiredMessage="La remise est obligatoire">
+							</h:inputText> <h:message for="remise" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Stock :</td>
+						<td><h:inputText id="stock" required="true"
+								value="#{articleBean.stock}"
+								requiredMessage="Le stock est obligatoire">
+								<f:validateLength minimum="1" maximum="4"></f:validateLength>
+							</h:inputText> <h:message for="stock" style="color:red"></h:message></td>
+					</tr>
+				</table>
+				<p>
+					<tr>
+						<td></td>
+						<td><h:button id="retour" value="Retour" outcome="utilisateur"></h:button>
+						</td>
+						<td><h:commandButton id="addArticle" value="Ajouter article"
+								action="#{articleBean.addArticle()}"></h:commandButton></td>
+					</tr>
+				</p>
+				<p>
+					<h:outputText value="#{cartePaiementBean.messageError}" style="color:red"></h:outputText>
+				</p>
+			</h:form>
+			</ui:define>
+	</ui:composition>
+</body>
+</html>

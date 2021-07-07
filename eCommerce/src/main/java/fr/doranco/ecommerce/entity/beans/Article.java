@@ -11,8 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -57,10 +55,6 @@ public class Article implements Serializable {
 	@NotNull
 	@Column(name = "is_vendable", nullable = false)
 	private boolean isVendable;
-	
-	@ManyToOne
-	@JoinColumn(name = "categorie_id", nullable = false)
-	private Categorie categorie; 
 	
 	@OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Set<Commentaire> commentaires;

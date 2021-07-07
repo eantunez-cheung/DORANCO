@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<h:outputStylesheet library="css" name="table-style.css"></h:outputStylesheet>
+<title>Ajouter carte</title>
+</head>
+
+<body>
+	<ui:composition template="resources/template/layout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<table>
+					<tr>
+						<td>Nom propriétaire :</td>
+						<td><h:inputText id="nom" required="true"
+								value="#{cartePaiementBean.nomProprietaire}" requiredMessage="Le nom du propriétaire est obligatoire">
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputText> <h:message for="nom" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Prénom propriétaire  :</td>
+						<td><h:inputText id="prenom" required="true"
+								value="#{cartePaiementBean.prenomProprietaire}"
+								requiredMessage="Le prénom du propriétaire est obligatoire">
+								<f:validateLength minimum="2" maximum="20"></f:validateLength>
+							</h:inputText> <h:message for="prenom" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Numéro :</td>
+						<td><h:inputText id="numero" required="true"
+								value="#{cartePaiementBean.numero}"
+								requiredMessage="Le numéro de la carte de paiement est obligatoire">
+								<f:validateLength minimum="16" maximum="16"></f:validateLength>
+							</h:inputText> <h:message for="numero" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Date de fin de validité :</td>
+						<td><h:inputText id="dateFinValidite" required="true"
+								value="#{cartePaiementBean.dateFinValidite}"
+								requiredMessage="La date de fin de validité est obligatoire">
+							</h:inputText> <h:message for="dateFinValidite" style="color:red"></h:message></td>
+					</tr>
+					<tr>
+						<td>Cryptogramme :</td>
+						<td><h:inputText id="cryptogramme" required="true"
+								value="#{cartePaiementBean.cryptogramme}"
+								requiredMessage="Le cryptogramme est obligatoire">
+								<f:validateLength minimum="3" maximum="3"></f:validateLength>
+							</h:inputText> <h:message for="cryptogramme" style="color:red"></h:message></td>
+					</tr>
+				</table>
+				<p>
+					<tr>
+						<td></td>
+						<td><h:button id="retour" value="Retour" outcome="utilisateur"></h:button>
+						</td>
+						<td><h:commandButton id="addCarte" value="Ajouter carte"
+								action="#{cartePaiementBean.addCarte()}"></h:commandButton></td>
+					</tr>
+				</p>
+				<p>
+					<h:outputText value="#{cartePaiementBean.messageError}" style="color:red"></h:outputText>
+				</p>
+			</h:form>
+			</ui:define>
+	</ui:composition>
+</body>
+</html>

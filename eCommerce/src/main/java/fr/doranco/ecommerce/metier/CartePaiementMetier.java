@@ -7,16 +7,19 @@ import java.util.Set;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.servlet.http.Cookie;
 
 import fr.doranco.ecommerce.cryptage.Cryptage;
 import fr.doranco.ecommerce.entity.beans.CartePaiement;
 import fr.doranco.ecommerce.entity.beans.Params;
+import fr.doranco.ecommerce.entity.beans.User;
 import fr.doranco.ecommerce.entity.dto.CartePaiementDto;
 import fr.doranco.ecommerce.enums.AlgorithmesCryptagePrincipal;
 import fr.doranco.ecommerce.model.dao.CartePaiementDao;
 import fr.doranco.ecommerce.model.dao.ICartePaiementDao;
 import fr.doranco.ecommerce.model.dao.IParamsDao;
 import fr.doranco.ecommerce.model.dao.ParamsDao;
+import fr.doranco.ecommerce.utils.Cookies;
 import fr.doranco.ecommerce.utils.Dates;
 
 public class CartePaiementMetier implements ICartePaiementMetier {
@@ -37,9 +40,13 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		
 		Date dateFinValidite = Dates.convertStringToDateUtil(cartepaiementDto.getDateFinValidite());
 		Date currentDate = Dates.convertDateTimeToDateUtil(LocalDate.now());
-		if (currentDate.compareTo(dateFinValidite) < 0) {
+		if (currentDate.compareTo(dateFinValidite) > 0) {
 			throw new IllegalArgumentException("La carte de paiement à expiré !");
 		}
+		
+		Cookie cookie = Cookies.getCookie("user");
+		User user = new User();
+		user.setId(Integer.valueOf(cookie.getValue()));
 		
 		String algo = AlgorithmesCryptagePrincipal.DES.getAlgorithme();
 		Params params = paramsDao.get(Params.class, 1);
@@ -51,6 +58,8 @@ public class CartePaiementMetier implements ICartePaiementMetier {
 		cartePaiement.setNumero(Cryptage.encrypt(algo, cartepaiementDto.getNumero(), key));
 		cartePaiement.setDateFinValidite(dateFinValidite);
 		cartePaiement.setCryptogramme(Cryptage.encrypt(algo, cartepaiementDto.getCryptogramme(), key));
+		cartePaiement.setUser(user);
+		
 		
 		cartePaiementDao.add(cartePaiement);
 	}

@@ -18,7 +18,19 @@
 				<h:form>
 					<ui:include src="/resources/template/header.xhtml">
 					</ui:include>
-					<h:button id="addAdresse" value="Ajouter adresse" outcome="add-adresse" style="float:right"></h:button>
+<!-- 					<h:commandButton value="Déconnexion" action="#{loginBean.seDeconnecter()}" style="float:right"></h:commandButton> -->
+					<h:button id="deconnexion" value="Déconnexion"
+						outcome="accueil" style="float:right"></h:button>
+					<h:button id="addAdresse" value="Ajouter adresse"
+						outcome="add-adresse" style="float:right"></h:button>
+					<h:button id="addCarte" value="Ajouter carte" outcome="add-carte"
+						style="float:right"></h:button>
+					<h:button id="addArticle" value="Ajouter article" outcome="add-article"
+						style="float:right"></h:button>
+					<p>
+						Bonjour
+						<h:outputText value="#{userBean.showUser()}" />
+					</p>
 				</h:form>
 			</f:view>
 		</ui:define>
@@ -26,8 +38,45 @@
 		<ui:define name="content">
 			<f:view>
 				<h:form>
-					<h4>Bienvenue chez Doranco</h4>
-					<p>Vous êtes connecté !</p>
+					<h4>Liste des articles :</h4>
+					<h:dataTable value="#{articleBean.getArticles()}" var="a">
+						<h:column>
+							<!-- entete de la colonne -->
+							<f:facet name="header">Nom</f:facet>
+							<!-- donnée de la colonne -->
+							<h:outputText value="#{a.nom}"></h:outputText>
+						</h:column>
+						<h:column>
+							<!-- entete de la colonne -->
+							<f:facet name="header">Description</f:facet>
+							<!-- donnée de la colonne -->
+							<h:outputText value="#{a.description}"></h:outputText>
+						</h:column>
+						<h:column>
+							<!-- entete de la colonne -->
+							<f:facet name="header">Prix</f:facet>
+							<!-- donnée de la colonne -->
+							<h:outputText value="#{a.prix}"></h:outputText>
+						</h:column>
+						<h:column>
+							<!-- entete de la colonne -->
+							<f:facet name="header">Remise</f:facet>
+							<!-- donnée de la colonne -->
+							<h:outputText value="#{a.remise}"></h:outputText>
+						</h:column>
+						<h:column>
+							<!-- entete de la colonne -->
+							<f:facet name="header">Stock</f:facet>
+							<!-- donnée de la colonne -->
+							<h:outputText value="#{a.stock}"></h:outputText>
+						</h:column>
+						<h:column>
+							<!-- entete de la colonne -->
+							<f:facet name="header">Action</f:facet>
+							<!-- donnée de la colonne -->
+							<h:commandButton value="Ajouter Panier" action="#{userBean.afficherUtilisateur(u)}"></h:commandButton>
+						</h:column>
+					</h:dataTable>
 				</h:form>
 			</f:view>
 		</ui:define>

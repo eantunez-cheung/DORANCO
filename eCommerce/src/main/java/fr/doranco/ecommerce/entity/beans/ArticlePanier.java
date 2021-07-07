@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -23,7 +24,7 @@ public class ArticlePanier implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "article_id", nullable = false)
 	private Article article;
 	

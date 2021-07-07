@@ -2,15 +2,14 @@ package fr.doranco.ecommerce.vue;
 
 import java.io.Serializable;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import fr.doranco.ecommerce.entity.dto.UserDto;
 import fr.doranco.ecommerce.metier.IUserMetier;
 import fr.doranco.ecommerce.metier.UserMetier;
+import fr.doranco.ecommerce.utils.Cookies;
 
 @ManagedBean(name = "loginBean")
 @SessionScoped
@@ -52,10 +51,17 @@ public class LoginBean implements Serializable {
 		} catch (Exception e) {
 			this.messageError = "Erreur technique lors de la connexion !";
 			System.out.println(e);
+			return "";
 		}
-		FacesMessage message = new FacesMessage(userDto.getId());
-		FacesContext.getCurrentInstance().addMessage("userId", message);
+		
+		Cookies.setCookie("user", userDto.getId());
+		
 		return "utilisateur";
+	}
+	
+	public String seDeconnecter() {
+		Cookies.removeCookie();
+		return "accueil";
 	}
 	
 	public String getEmail() {
